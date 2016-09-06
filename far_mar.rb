@@ -7,5 +7,8 @@ require 'csv'
 module FarMar; end
 
 # all of our data classes that live in the module
-require 'lib/farmar_market'
+require_relative 'lib/Market'
+require_relative 'lib/Vendor'
+require_relative 'lib/Product'
+require_relative 'lib/Sale'
 # ...require all needed classes
