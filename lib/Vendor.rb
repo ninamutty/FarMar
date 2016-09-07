@@ -1,24 +1,15 @@
 # lib/Vendor.rb - Vendor class
-#require_relative '../far_mar.rb'
+require_relative '../far_mar.rb'
 require 'awesome_print'
 
 class FarMar::Vendor < FarMar::Base
     attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :class_info
 
-    # @class_info = {}
-    def initialize(vendor_hash)
-        @vendor_id = vendor_hash[:vendor_id]
-        @name = vendor_hash[:name]
-        @num_of_employees = vendor_hash[:num_of_employees]
-        @market_id = vendor_hash[:market_id]
-    end
 
-    def self.all
+    def self.all(information = "support/vendors.csv")
         super
     end
 
-    def self.find(id)
-    end
 
     def markets
     end
@@ -37,5 +28,18 @@ class FarMar::Vendor < FarMar::Base
 end
 
 
-#ap FarMar::Vendor.gets_csv_info
-#ap FarMar::Vendor.all
+# #ap FarMar::Vendor.gets_csv_info
+# ap FarMar::Vendor.all
+# ap FarMar::Vendor.find(20)
+
+
+
+
+
+
+# def initialize(vendor_hash)
+#     @vendor_id = vendor_hash[:vendor_id]
+#     @name = vendor_hash[:name]
+#     @num_of_employees = vendor_hash[:num_of_employees]
+#     @market_id = vendor_hash[:market_id]
+# end

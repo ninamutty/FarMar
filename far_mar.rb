@@ -15,19 +15,23 @@ module FarMar
         end
 
         def self.gets_csv_info(filename)
-            file_info = []
+            file_info = {}
             CSV.foreach(filename, {:headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil]}) do |row|
-                file_info << row
+                file_info[row[0]] = row
             end
             return file_info
         end
 
 
-
-
-        def self.all
-            class_info
+        def self.all(information= "support/markets.csv")
+            return gets_csv_info(information)
         end
+
+        def self.find(id_num)
+            raise ArgumentError if id_num.class != Fixnum 
+            return all[id_num]
+        end
+
     end
 end
 
@@ -40,7 +44,9 @@ require_relative 'lib/Product'
 require_relative 'lib/Sale'
 # ...require all needed classes
 
-ap FarMar::Base.gets_csv_info("support/products.csv")
+#ap FarMar::Base.gets_csv_info("support/products.csv")
+#ap FarMar::Base.all
+#ap FarMar::Base.find(300)
 
 
 
