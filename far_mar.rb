@@ -3,6 +3,7 @@
 # gems your project needs
 require 'csv'
 require 'awesome_print'
+require 'chronic'
 
 # our namespace module
 module FarMar
