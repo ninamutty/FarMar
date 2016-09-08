@@ -3,11 +3,21 @@ require_relative '../far_mar.rb'
 
 
 class FarMar::Market < FarMar::Base
-    attr_reader :market_id, :name, :address, :city, :county, :state, :zip, :market_hash, :class_info
+    attr_reader :vendor_array, :markets_array, :all_info, :market_id, :market_name, :market_address, :city, :county, :state, :zip
 
-    def initialize #(new_market_hash)
+    def initialize(new_market_hash)
+        @market_id = new_market_hash[:market_id]
+        @market_name = new_market_hash[:market_name]
+        @market_address = new_market_hash[:market_address]
+        @city = new_market_hash[:city]
+        @county = new_market_hash[:county]
+        @state = new_market_hash[:state]
+        @zip = new_market_hash[:zip]
+        @vendor_array = []
+        @markets_array = []
     end
 
+    ### Imports the data from the CSV file and creats new instances of each of them - then puts them into an array
     def self.all(information = "support/markets.csv")
         super
     end
@@ -17,8 +27,11 @@ class FarMar::Market < FarMar::Base
     end
 end
 
-#
-# ap FarMar::Market.all
+#market = FarMar::Market.find(300)
+#ap market = FarMar::Market.new(FarMar::Market.find(300))
+
+# all_markets = FarMar::Market.all
+# ap all_markets[3].class
 # ap FarMar::Market.find(1)
 
 # ap FarMar::Market.all[340] #-- zip is a nil value

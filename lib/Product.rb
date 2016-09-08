@@ -2,15 +2,14 @@
 require_relative '../far_mar.rb'
 
 class FarMar::Product < FarMar::Base
-    attr_reader :product_id, :name, :vendor_id, :class_info
+    attr_reader :product_id, :product_name, :vendor_id, :vendor_array
 
     def initialize(product_hash)
-        @id = product_hash[:product_id]
-        @name = product_hash[:name]
+        @product_id = product_hash[:product_id]
+        @product_name = product_hash[:product_name]
         @vendor_id = product_hash[:vendor_id]
-        @class_info = {}
+        #@vendor_array =
     end
-
 
     def self.all(information = "support/products.csv")
         super
@@ -30,7 +29,14 @@ class FarMar::Product < FarMar::Base
     end
 end
 
-# ap FarMar::Product.all
+# all_products = FarMar::Product.all
+# ap all_products[5].class
+
+
+
+
+
+
 # ap FarMar::Product.find(3)
 
 

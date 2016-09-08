@@ -7,8 +7,11 @@ require 'awesome_print'
 # our namespace module
 module FarMar
     class Base
-        attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :class_info
+        attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :all_info
 
+        def initialize
+            @all_info = nil
+        end
 
         CSV::Converters[:blank_to_nil] = lambda do |field|
           field && field.empty? ? nil : field
@@ -24,11 +27,19 @@ module FarMar
 
 
         def self.all(information= "support/markets.csv")
-            return gets_csv_info(information)
+            info_hash = {}
+            file_info = gets_csv_info(information)
+            ## this takes the info file and reads loops through each key/value pair to turn them in to instances of the class they are being called on
+            file_info.each do |key, value|
+                info_hash[key] = self.new(value)
+            end
+            return info_hash
+            #### shovel self.new(hash_value) and it should be able to tell what class it is that's calling it!
         end
 
         def self.find(id_num)
-            raise ArgumentError if id_num.class != Fixnum 
+            raise ArgumentError if id_num.class != Fixnum
+            ## searches hash for an id number
             return all[id_num]
         end
 

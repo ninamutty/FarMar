@@ -5,6 +5,12 @@ require 'awesome_print'
 class FarMar::Vendor < FarMar::Base
     attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :class_info
 
+    def initialize(vendor_hash)
+        @vendor_id = vendor_hash[:vendor_id]
+        @vendor_name = vendor_hash[:vendor_name]
+        @num_of_employees = vendor_hash[:num_of_employees]
+        @market_id = vendor_hash[:market_id]
+    end
 
     def self.all(information = "support/vendors.csv")
         super
@@ -26,6 +32,12 @@ class FarMar::Vendor < FarMar::Base
     def self.by_market(market_id)
     end
 end
+
+all_vendors = FarMar::Vendor.all
+ap all_vendors[5].class
+
+
+
 
 
 # #ap FarMar::Vendor.gets_csv_info
