@@ -33,8 +33,8 @@ class FarMar::Vendor < FarMar::Base
     end
 end
 
-all_vendors = FarMar::Vendor.all
-ap all_vendors[5].class
+# ap all_vendors = FarMar::Vendor.all
+# ap all_vendors[5]
 
 
 

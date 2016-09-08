@@ -2,7 +2,7 @@
 require_relative '../far_mar.rb'
 
 class FarMar::Sale < FarMar::Base
-    attr_reader :id, :amount, :purchase_time, :vendor_id, :product_id
+    attr_reader :sale_id, :amount, :purchase_time, :vendor_id, :product_id
 
 
     def initialize(sale_hash)

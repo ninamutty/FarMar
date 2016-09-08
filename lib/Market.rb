@@ -1,6 +1,6 @@
 # lib/Market.rb - Market class
 require_relative '../far_mar.rb'
-
+require 'awesome_print'
 
 class FarMar::Market < FarMar::Base
     attr_reader :vendor_array, :markets_array, :all_info, :market_id, :market_name, :market_address, :city, :county, :state, :zip
@@ -24,8 +24,13 @@ class FarMar::Market < FarMar::Base
 
 
     def vendors
+
+        return @vendor_array
     end
 end
+
+
+#ap FarMar::Market.all
 
 #market = FarMar::Market.find(300)
 #ap market = FarMar::Market.new(FarMar::Market.find(300))

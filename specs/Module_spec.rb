@@ -2,40 +2,39 @@ require_relative 'spec_helper'
 require_relative '../lib/Market'
 
 describe 'Tsting self.all' do
-    let (:market_info) {FarMar::Base.all("support/markets.csv")}
-    let (:vendor_info) {FarMar::Base.all("support/vendors.csv")}
-    let (:product_info) {FarMar::Base.all("support/products.csv")}
-    let (:sale_info) {FarMar::Base.all("support/sales.csv")}
+    let (:market_info) {FarMar::Market.all("support/markets.csv")}
+    let (:vendor_info) {FarMar::Vendor.all("support/vendors.csv")}
+    let (:product_info) {FarMar::Product.all("support/products.csv")}
+    let (:sale_info) {FarMar::Sale.all("support/sales.csv")}
 
     it 'must return a hash' do
         expect (FarMar::Market.all("support/markets.csv")).must_be_kind_of Hash
     end
 
-    it 'must accept no parameters' do
-        expect (FarMar::Market.all).must_equal (FarMar::Market.all("support/markets.csv"))
-    end
-
     it 'Must return a collection of all of the instances of the class it is called on' do
-        market_info.must_equal FarMar::Market.all
-        vendor_info.must_equal FarMar::Vendor.all
-        product_info.must_equal FarMar::Product.all
-        sale_info.must_equal FarMar::Sale.all
+        market_info.each_value {|object| object.class.must_equal FarMar::Market}
+        vendor_info.each_value {|object| object.class.must_equal FarMar::Vendor}
+        product_info.each_value {|object| object.class.must_equal FarMar::Product}
+        sale_info.each_value {|object| object.class.must_equal FarMar::Sale}
 
-        # expect(FarMar::Market.all).must_equal(market_info)
-        # expect(FarMar::Product.all).must_equal(product_info)
-        # expect(FarMar::Sale.all).must_equal(sale_info)
-        # expect(FarMar::Vendor.all).must_equal(vendor_info)
     end
 end
 
 describe 'Testing self.find(id)' do
-    let (:sample_market_id) {FarMar::Market.all[340]}  ### I think this needs to be written differently...
+    let (:sample_market_id) {FarMar::Market.all[340]}
+    let (:sample_vendor_id) {FarMar::Vendor.all[50]}
+    let (:sample_product_id) {FarMar::Product.all[37]}
+    let (:sample_sale_id) {FarMar::Sale.all[405]}
 
     it 'It must raise an IllegalArgument if given a non-Fixnum' do
         expect (proc {FarMar::Sale.find("cheese")} ).must_raise ArgumentError
     end
 
     it 'must find the correct instance' do
-        expect(FarMar::Market.find(340)).must_be :==, (sample_market_id)
+        expect(FarMar::Market.find(340).market_id).must_equal(sample_market_id.market_id)
+        expect(FarMar::Vendor.find(50).vendor_id).must_equal(sample_vendor_id.vendor_id)
+        expect(FarMar::Product.find(37).product_id).must_equal(sample_product_id.product_id)
+        expect(FarMar::Sale.find(405).sale_id).must_equal(sample_sale_id.sale_id)
+
     end
 end
