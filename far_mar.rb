@@ -7,8 +7,7 @@ require 'awesome_print'
 # our namespace module
 module FarMar
     class Base
-        attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :all_info
-
+        attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :all_info, :file_info
         def initialize(hash)
             #@all_info = nil
         end

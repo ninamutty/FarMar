@@ -22,7 +22,7 @@ class FarMar::Market < FarMar::Base
         super
     end
 
-
+    #returns a collection of FarMar::Vendor instances that are associated with the market by themarket_id field.
     def vendors
         FarMar::Vendor.all.each_value do |vendor|
             @vendor_array << vendor if vendor.market_id == @market_id
