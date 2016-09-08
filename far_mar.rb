@@ -69,8 +69,6 @@ require_relative 'lib/Sale'
 
 
 
-
-
         # def initialize(vendor_hash)
         #     @vendor_id = vendor_hash[:id]
         #     @name = vendor_hash[:name]
