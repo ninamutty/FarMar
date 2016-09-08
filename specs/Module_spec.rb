@@ -29,7 +29,7 @@ describe 'Tsting self.all' do
 end
 
 describe 'Testing self.find(id)' do
-    let (:sample_market_id) {FarMar::Market.all[340]}
+    let (:sample_market_id) {FarMar::Market.all[340]}  ### I think this needs to be written differently...
 
     it 'It must raise an IllegalArgument if given a non-Fixnum' do
         expect (proc {FarMar::Sale.find("cheese")} ).must_raise ArgumentError
