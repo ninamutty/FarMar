@@ -8,24 +8,34 @@ class FarMar::Product < FarMar::Base
         @product_id = product_hash[:product_id]
         @product_name = product_hash[:product_name]
         @vendor_id = product_hash[:vendor_id]
-        #@vendor_array =
     end
 
     def self.all(information = "support/products.csv")
         super
     end
 
-
     def vendor
+        FarMar::Vendor.find(@vendor_id)
     end
 
     def sales
+        sales_array = []
+        FarMar::Sale.all.each_value do |sale|
+            sales_array << sale if sale.product_id == @product_id
+        end
+        return sales_array
     end
 
     def number_of_sales
+        sales.length     ### Is it better to call sales inside this (where you may have to reload all of the files - or to use the @sales_array?)
     end
 
-    def self.by_vendor(vendor_id)
+    def self.by_vendor(given_vendor_id)
+        vendor_products_array = []
+        all.each_value do |product|
+            vendor_products_array << product if product.vendor_id == given_vendor_id
+        end
+        return vendor_products_array
     end
 end
 
