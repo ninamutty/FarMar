@@ -6,16 +6,21 @@ require_relative 'Product'
 require 'awesome_print'
 
 class FarMar::Vendor < FarMar::Base
-    attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :class_info, :sales_array, :products_array
+    attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :class_info, :sales_array, :products_array #, :all_vendors
 
     def initialize(vendor_hash)
         @vendor_id = vendor_hash[:vendor_id]
         @vendor_name = vendor_hash[:vendor_name]
         @num_of_employees = vendor_hash[:num_of_employees]
         @market_id = vendor_hash[:market_id]
+        #@all_vendors
     end
 
-    def self.all(information = "support/vendors.csv")
+    def self.gets_csv_info(information = "support/vendors.csv", variable_to_store = @all_vendors)
+        super
+    end
+
+    def self.all(all_variable= @all_vendors)
         super
     end
 
@@ -60,6 +65,7 @@ class FarMar::Vendor < FarMar::Base
     end
 end
 
+#ap FarMar::Vendor.all
 
 
 

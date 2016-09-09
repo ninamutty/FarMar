@@ -8,41 +8,50 @@ require 'chronic'
 # our namespace module
 module FarMar
     class Base
-        attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :all_info, :file_info
+        attr_reader :vendor_id, :name, :num_of_employees, :market_id, :vendor_hash, :all_info, :file_info, :all_markets, :all_vendors, :all_products, :all_sales
+
         def initialize(hash)
-            #@all_info = nil
+            @all_markets
+            @all_vendors
+            @all_products
+            @all_sales
         end
 
         CSV::Converters[:blank_to_nil] = lambda do |field|
           field && field.empty? ? nil : field
         end
 
-        def self.gets_csv_info(filename)
-            file_info = {}
-            CSV.foreach(filename, {:headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil]}) do |row|
-                file_info[row[0]] = row
-            end
-            return file_info
+
+        def self.all(all_variable= @all_markets)
+            return all_variable ||= gets_csv_info   #### This will only read the file in if the variable that stores the information for each spread sheet is falsey - aka the first time - after that it will just return the already stored variable!
         end
 
-
-        def self.all(information= "support/markets.csv")
-            info_hash = {}
-            file_info = gets_csv_info(information)
-
-            ## this takes the info file and reads loops through each key/value pair to turn them in to instances of the class they are being called on
-            file_info.each do |key, value|
-                info_hash[key] = self.new(value)
-            end
-            return info_hash
-
-            #### shovel self.new(hash_value) and it should be able to tell what class it is that's calling it!
-        end
 
         def self.find(id_num)
             raise ArgumentError if id_num.class != Fixnum
             ## searches hash for an id number
             return all[id_num]
+        end
+
+
+
+        private
+        def self.gets_csv_info(filename= "support/markets.csv", variable_to_store= @all_markets)
+            file_info = {}
+            objects_hash = {}
+
+
+            ##This reads in a blank file
+            CSV.foreach(filename, {:headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil]}) do |row|
+                file_info[row[0]] = row
+            end
+
+            ## this takes the info file and reads loops through each key/value pair to turn them in to instances of the class they are being called on
+            file_info.each do |key, value|
+                objects_hash[key] = self.new(value)
+            end
+            variable_to_store = objects_hash
+            return variable_to_store
         end
 
     end
