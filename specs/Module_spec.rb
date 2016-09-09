@@ -2,10 +2,10 @@ require_relative 'spec_helper'
 require_relative '../lib/Market'
 
 describe 'Tsting self.all' do
-    let (:market_info) {FarMar::Market.all("support/markets.csv")}
-    let (:vendor_info) {FarMar::Vendor.all("support/vendors.csv")}
-    let (:product_info) {FarMar::Product.all("support/products.csv")}
-    let (:sale_info) {FarMar::Sale.all("support/sales.csv")}
+    let (:market_info) {FarMar::Market.all}
+    let (:vendor_info) {FarMar::Vendor.all}
+    let (:product_info) {FarMar::Product.all}
+    let (:sale_info) {FarMar::Sale.all}
 
     let (:sample_market_id) {market_info[340]}
     let (:sample_vendor_id) {vendor_info[50]}
@@ -18,7 +18,7 @@ describe 'Tsting self.all' do
     ### 'Testing self.all' ###
     ##########################
     it 'must return a hash' do
-        expect (FarMar::Market.all("support/markets.csv")).must_be_kind_of Hash
+        expect (FarMar::Market.all).must_be_kind_of Hash
     end
 
     it 'Must return a collection of all of the instances of the class it is called on' do
