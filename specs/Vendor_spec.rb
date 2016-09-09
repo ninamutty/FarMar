@@ -4,7 +4,12 @@ require_relative '../lib/Vendor'
 
 describe 'testing markets instance method' do
     let (:vendor_instance) {FarMar::Vendor.find(52)}
+    let (:vendors_by_market) {FarMar::Vendor.by_market(20)}
 
+
+    #########################################
+    ### 'testing markets instance method' ###
+    #########################################
     it 'must return a market instance' do
         expect (vendor_instance.markets).must_be_kind_of FarMar::Market
     end
@@ -12,12 +17,12 @@ describe 'testing markets instance method' do
     it 'must search for the instance of markets that has a market_id equal to the market_id of the Vendor instance' do
         vendor_instance.markets.market_id.must_equal (FarMar::Market.find(vendor_instance.market_id).market_id)
     end
-end
 
 
-describe 'testing products instance method' do
-    let (:vendor_instance) {FarMar::Vendor.find(38)}
 
+    #########################################
+    ### 'testing products instance method' ###
+    #########################################
     it 'must return an array of product instances' do
         expect (vendor_instance.products).must_be_kind_of Array
         vendor_instance.products.each {|product| product.must_be_kind_of FarMar::Product}
@@ -26,12 +31,12 @@ describe 'testing products instance method' do
     it 'must search for instances of products who have a vendor_id equal to the vendor_id of the Vendor instance' do
         vendor_instance.products.each {|product| (product.vendor_id).must_equal (vendor_instance.vendor_id)}
     end
-end
 
 
-describe 'testing sales instance method' do
-    let (:vendor_instance) {FarMar::Vendor.find(12)}
 
+    #######################################
+    ### 'testing sales instance method' ###
+    #######################################
     it 'must return an array of sales instances' do
         expect (vendor_instance.sales).must_be_kind_of Array
         vendor_instance.sales.each {|sale| sale.must_be_kind_of FarMar::Sale}
@@ -40,11 +45,11 @@ describe 'testing sales instance method' do
     it 'must search for instances of sales who have a vendor_id equal to the vendor_id of the Vendor instance' do
         vendor_instance.sales.each {|sale| (sale.vendor_id).must_equal (vendor_instance.vendor_id)}
     end
-end
 
 
-describe 'testing revenue instance method' do
-    let (:vendor_instance) {FarMar::Vendor.find(15)}
+    #########################################
+    ### 'testing revenue instance method' ###
+    #########################################
     let(:sale_sum) {
         total = 0
         vendor_instance.sales.each {|sale| total += sale.sale_amount}
@@ -57,12 +62,11 @@ describe 'testing revenue instance method' do
     it 'must equal the sum of the amounts of sales' do
         vendor_instance.revenue.must_equal (sale_sum)
     end
-end
 
 
-describe 'testing self.by_market(market_id) class method' do
-    let (:vendors_by_market) {FarMar::Vendor.by_market(20)}
-
+    ########################################################
+    ### 'testing self.by_market(market_id) class method' ###
+    ########################################################
     it 'must return an array of vendor instances' do
         expect (vendors_by_market).must_be_kind_of Array
         vendors_by_market.each {|vendor| vendor.must_be_kind_of FarMar::Vendor}

@@ -7,6 +7,16 @@ describe 'Tsting self.all' do
     let (:product_info) {FarMar::Product.all("support/products.csv")}
     let (:sale_info) {FarMar::Sale.all("support/sales.csv")}
 
+    let (:sample_market_id) {market_info[340]}
+    let (:sample_vendor_id) {vendor_info[50]}
+    let (:sample_product_id) {product_info[37]}
+    let (:sample_sale_id) {sale_info[405]}
+
+
+
+    ##########################
+    ### 'Testing self.all' ###
+    ##########################
     it 'must return a hash' do
         expect (FarMar::Market.all("support/markets.csv")).must_be_kind_of Hash
     end
@@ -18,14 +28,10 @@ describe 'Tsting self.all' do
         sale_info.each_value {|object| object.class.must_equal FarMar::Sale}
 
     end
-end
 
-describe 'Testing self.find(id)' do
-    let (:sample_market_id) {FarMar::Market.all[340]}
-    let (:sample_vendor_id) {FarMar::Vendor.all[50]}
-    let (:sample_product_id) {FarMar::Product.all[37]}
-    let (:sample_sale_id) {FarMar::Sale.all[405]}
-
+    ###############################
+    ### 'Testing self.find(id)' ###
+    ###############################
     it 'It must raise an IllegalArgument if given a non-Fixnum' do
         expect (proc {FarMar::Sale.find("cheese")} ).must_raise ArgumentError
     end

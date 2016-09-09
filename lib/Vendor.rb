@@ -73,23 +73,3 @@ end
 # ap vendor.market_id
 
 # ap all_vendors[5]
-
-
-
-
-
-# #ap FarMar::Vendor.gets_csv_info
-# ap FarMar::Vendor.all
-# ap FarMar::Vendor.find(20)
-
-
-
-
-
-
-# def initialize(vendor_hash)
-#     @vendor_id = vendor_hash[:vendor_id]
-#     @name = vendor_hash[:name]
-#     @num_of_employees = vendor_hash[:num_of_employees]
-#     @market_id = vendor_hash[:market_id]
-# end

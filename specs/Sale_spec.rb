@@ -7,9 +7,13 @@ require_relative '../lib/Sale'
 
 # self.between(beginning_time, end_time)	Class	returns a collection of FarMar::Sale objects where the purchase time is between the two times given as arguments
 
-describe 'testing vendor instance method' do
+describe 'testing FarMar::Sale methods' do
     let (:sale_instance) {FarMar::Sale.find(67)}
+    let (:sales_by_time) {FarMar::Sale.between("2013-11-12 06:03:54 -0800", "2013-11-12 14:38:29 -0800")}
 
+    ########################################
+    ### 'testing vendor instance method' ###
+    ########################################
     it 'must return a vendor instance' do
         expect (sale_instance.vendor).must_be_kind_of FarMar::Vendor
     end
@@ -17,11 +21,10 @@ describe 'testing vendor instance method' do
     it 'must search for the instance of vendor that has a vendor_id equal to the vendor_id of the sale instance' do
         sale_instance.vendor.vendor_id.must_equal (FarMar::Vendor.find(sale_instance.vendor_id).vendor_id)
     end
-end
 
-describe 'testing product instance method' do
-    let (:sale_instance) {FarMar::Sale.find(54)}
-
+    #########################################
+    ### 'testing product instance method' ###
+    #########################################
     it 'must return a product instance' do
         expect (sale_instance.product).must_be_kind_of FarMar::Product
     end
@@ -29,11 +32,12 @@ describe 'testing product instance method' do
     it 'must search for the instance of the product that has a product_id equal to the product_id of the sale instance' do
         sale_instance.product.product_id.must_equal (FarMar::Product.find(sale_instance.product_id).product_id)
     end
-end
 
 
-describe 'testing self.between(beginning_time, end_time) class method' do
-    let (:sales_by_time) {FarMar::Sale.between("2013-11-12 06:03:54 -0800", "2013-11-12 14:38:29 -0800")}
+    #####################################################################
+    ### 'testing self.between(beginning_time, end_time) class method' ###
+    #####################################################################
+    #let (:sales_by_time) {FarMar::Sale.between("2013-11-12 06:03:54 -0800", "2013-11-12 14:38:29 -0800")}
 
     it 'must return an array of sale instances' do
         expect (sales_by_time).must_be_kind_of Array

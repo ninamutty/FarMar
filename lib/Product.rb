@@ -41,29 +41,3 @@ end
 
 # all_products = FarMar::Product.all
 # ap all_products[5].class
-
-
-
-
-
-
-# ap FarMar::Product.find(3)
-
-
-
-
-
-
-
-
-# def self.gets_csv_info
-#     ### Read in products data files ###
-#     CSV.open("support/products.csv", 'r').each do |product|
-#         id = product[0]
-#         name = product[1]
-#         vendor_id = product[2]
-#
-#         new_product = {product_id: id, name: name, vendor_id: vendor_id}
-#         @class_info[id] = FarMar::Product.new(new_product)
-#     end
-# end
